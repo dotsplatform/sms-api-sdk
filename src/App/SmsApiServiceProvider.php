@@ -7,7 +7,6 @@
 
 namespace Dotsplatform\CashbackApi;
 
-
 use Illuminate\Support\ServiceProvider;
 
 class SmsApiServiceProvider extends ServiceProvider
@@ -15,7 +14,8 @@ class SmsApiServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/../config/sms-api-sdk.php', 'sms-server'
+            __DIR__ . '/../config/sms-api-sdk.php',
+            'sms-server'
         );
     }
 

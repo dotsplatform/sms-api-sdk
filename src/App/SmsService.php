@@ -7,7 +7,6 @@
 
 namespace Dotsplatform\Sms;
 
-
 use Dotsplatform\Sms\DTO\InfobipDTO;
 use Dotsplatform\Sms\DTO\MainSmsDTO;
 use Dotsplatform\Sms\DTO\SendPulseDTO;

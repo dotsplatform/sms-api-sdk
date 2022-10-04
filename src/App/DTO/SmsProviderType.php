@@ -7,7 +7,6 @@
 
 namespace Dotsplatform\Sms\DTO;
 
-
 abstract class SmsProviderType
 {
     public const INFOBIP = 'infobip';

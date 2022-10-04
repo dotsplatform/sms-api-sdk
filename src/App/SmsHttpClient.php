@@ -7,7 +7,6 @@
 
 namespace Dotsplatform\Sms;
 
-
 use Dotsplatform\Sms\Http\HttpClient;
 use Exception;
 use GuzzleHttp\Exception\ClientException;
@@ -35,7 +34,6 @@ class SmsHttpClient extends HttpClient
         try {
             $this->post($url, $body);
         } catch (Exception $e) {
-
         }
     }
 
@@ -107,7 +105,8 @@ class SmsHttpClient extends HttpClient
 
     private function generateStoreAccountProviderUrl(StoreProviderDTO $dto): string
     {
-        return sprintf(self::STORE_PROVIDER_SMS_URL_TEMPLATE,
+        return sprintf(
+            self::STORE_PROVIDER_SMS_URL_TEMPLATE,
             $dto->getAccountId(),
             $dto->getType(),
         );

@@ -7,7 +7,6 @@
 
 namespace Dotsplatform\Sms\DTO;
 
-
 use Dots\Data\DTO;
 
 class StoreProviderDTO extends DTO
