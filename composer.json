@@ -1,5 +1,5 @@
 {
-    "name": "yehorherasymchuk/sms-api-sdk",
+    "name": "dotsplatform/sms-api-sdk",
     "description": "SDK for dotsplatform sms service",
     "autoload": {
         "psr-4": {
