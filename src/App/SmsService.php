@@ -16,6 +16,8 @@ use Dotsplatform\Sms\DTO\SmsProviderType;
 use Dotsplatform\Sms\DTO\StoreAccountDTO;
 use Dotsplatform\Sms\DTO\StoreProviderDTO;
 use Dotsplatform\Sms\DTO\TurboSmsDTO;
+use Illuminate\Support\Collection;
+use MA\App\Notification\SMS\DTO\SmsFiltersDTO;
 
 class SmsService
 {
@@ -66,5 +68,14 @@ class SmsService
     public function sendSms(SmsMessageDTO $dto): void
     {
         $this->smsHttpClient->sendSms($dto);
+    }
+
+    /**
+     * @param SmsFiltersDTO $dto
+     * @return Collection<int, SmsFiltersDTO>
+     */
+    public function getMessages(SmsFiltersDTO $dto): Collection
+    {
+        return $this->smsHttpClient->getMessages($dto);
     }
 }
