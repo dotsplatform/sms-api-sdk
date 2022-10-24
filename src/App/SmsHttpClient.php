@@ -14,9 +14,12 @@ use Dotsplatform\Sms\DTO\SmsAccountSettingsDTO;
 use Dotsplatform\Sms\DTO\SmsMessageDTO;
 use Dotsplatform\Sms\DTO\StoreAccountDTO;
 use Dotsplatform\Sms\DTO\StoreProviderDTO;
+use Illuminate\Support\Collection;
+use Dotsplatform\Sms\DTO\SmsFiltersDTO;
 
 class SmsHttpClient extends HttpClient
 {
+    private const GET_MESSAGES_URL_TEMPLATE = '/api/accounts/%s/sms';
     private const SEND_SMS_URL_TEMPLATE = '/api/accounts/%s/sms';
     private const STORE_ACCOUNT_URL_TEMPLATE = '/api/accounts';
     private const FIND_ACCOUNT_URL_TEMPLATE = '/api/accounts/%s';
@@ -33,7 +36,24 @@ class SmsHttpClient extends HttpClient
         ];
         try {
             $this->post($url, $body);
-        } catch (Exception $e) {
+        } catch (Exception) {
+        }
+    }
+
+    /**
+     * @param SmsFiltersDTO $dto
+     * @return Collection<int, SmsFiltersDTO>
+     */
+    public function getMessages(SmsFiltersDTO $dto): Collection
+    {
+        $url = $this->generateGetMessagesUrl($dto->getAccountId());
+        $params = $dto->toArray();
+        unset($params['accountId']);
+        try {
+            $response = $this->get($url, $params);
+            return new Collection($response);
+        } catch (Exception) {
+            return new Collection([]);
         }
     }
 
@@ -86,6 +106,11 @@ class SmsHttpClient extends HttpClient
         } catch (ClientException) {
             return null;
         }
+    }
+
+    private function generateGetMessagesUrl(string $accountId): string
+    {
+        return sprintf(self::GET_MESSAGES_URL_TEMPLATE, $accountId);
     }
 
     private function generateSendSmsUrl(string $accountId): string
