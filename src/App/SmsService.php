@@ -17,7 +17,7 @@ use Dotsplatform\Sms\DTO\StoreAccountDTO;
 use Dotsplatform\Sms\DTO\StoreProviderDTO;
 use Dotsplatform\Sms\DTO\TurboSmsDTO;
 use Illuminate\Support\Collection;
-use MA\App\Notification\SMS\DTO\SmsFiltersDTO;
+use Dotsplatform\Sms\DTO\SmsFiltersDTO;
 
 class SmsService
 {

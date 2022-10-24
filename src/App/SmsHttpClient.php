@@ -15,7 +15,7 @@ use Dotsplatform\Sms\DTO\SmsMessageDTO;
 use Dotsplatform\Sms\DTO\StoreAccountDTO;
 use Dotsplatform\Sms\DTO\StoreProviderDTO;
 use Illuminate\Support\Collection;
-use MA\App\Notification\SMS\DTO\SmsFiltersDTO;
+use Dotsplatform\Sms\DTO\SmsFiltersDTO;
 
 class SmsHttpClient extends HttpClient
 {
