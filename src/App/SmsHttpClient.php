@@ -51,7 +51,9 @@ class SmsHttpClient extends HttpClient
         $params = $dto->toArray();
         unset($params['accountId']);
         try {
-            $response = $this->get($url, $params);
+            $response = $this->get($url, [
+                'query' => $params,
+            ]);
             $collection = new Collection($response);
             return $collection->map(function ($item) {
                 return SmsDTO::fromArray([
