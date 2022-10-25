@@ -11,6 +11,7 @@ use Dotsplatform\Sms\DTO\InfobipDTO;
 use Dotsplatform\Sms\DTO\MainSmsDTO;
 use Dotsplatform\Sms\DTO\SendPulseDTO;
 use Dotsplatform\Sms\DTO\SmsAccountSettingsDTO;
+use Dotsplatform\Sms\DTO\SmsDTO;
 use Dotsplatform\Sms\DTO\SmsMessageDTO;
 use Dotsplatform\Sms\DTO\SmsProviderType;
 use Dotsplatform\Sms\DTO\StoreAccountDTO;
@@ -72,7 +73,7 @@ class SmsService
 
     /**
      * @param SmsFiltersDTO $dto
-     * @return Collection<int, SmsFiltersDTO>
+     * @return Collection<int, SmsDTO>
      */
     public function getMessages(SmsFiltersDTO $dto): Collection
     {

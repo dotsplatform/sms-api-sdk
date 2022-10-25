@@ -7,6 +7,7 @@
 
 namespace Dotsplatform\Sms;
 
+use Dotsplatform\Sms\DTO\SmsDTO;
 use Dotsplatform\Sms\Http\HttpClient;
 use Exception;
 use GuzzleHttp\Exception\ClientException;
@@ -42,7 +43,7 @@ class SmsHttpClient extends HttpClient
 
     /**
      * @param SmsFiltersDTO $dto
-     * @return Collection<int, SmsFiltersDTO>
+     * @return Collection<int, SmsDTO>
      */
     public function getMessages(SmsFiltersDTO $dto): Collection
     {
@@ -51,7 +52,21 @@ class SmsHttpClient extends HttpClient
         unset($params['accountId']);
         try {
             $response = $this->get($url, $params);
-            return new Collection($response);
+            $collection = new Collection($response);
+            return $collection->map(function ($item) {
+                return SmsDTO::fromArray([
+                    'id' => $item['id'],
+                    'phone' => $item['phone'],
+                    'status' => $item['status'],
+                    'message' => $item['message'],
+                    'accountId' => $item['account_id'],
+                    'providerId' => $item['provider_id'],
+                    'providerType' => $item['provider_type'],
+                    'responseMessage' => $item['response_message'],
+                    'sentTime' => $item['sent_time'],
+                ]);
+            });
+
         } catch (Exception) {
             return new Collection([]);
         }
