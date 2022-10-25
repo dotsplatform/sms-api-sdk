@@ -12,6 +12,10 @@ use Dots\Data\DTO;
 
 class SmsDTO extends DTO
 {
+    public const STATUS_NEW = 0;
+    public const STATUS_SUCCESSFUL = 20;
+    public const STATUS_FAILED = 30;
+
     protected string $id;
     protected string $accountId;
     protected string $providerId;
