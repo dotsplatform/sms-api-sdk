@@ -14,12 +14,18 @@ class SmsFiltersDTO extends DTO
     protected string $accountId;
     protected ?string $provider = null;
     protected ?int $status = null;
+    protected ?string $phone;
     protected int $limit = 50;
     protected int $offset = 0;
 
     public function getAccountId(): string
     {
         return $this->accountId;
+    }
+
+    public function getPhone(): ?string
+    {
+        return $this->phone;
     }
 
     public function getProvider(): ?string
