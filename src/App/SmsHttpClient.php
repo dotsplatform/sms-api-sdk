@@ -51,7 +51,7 @@ class SmsHttpClient extends HttpClient
             ]);
             return SmsList::fromArray($response);
         } catch (Exception) {
-            return SmsList::fromArray([]);
+            return new SmsList();
         }
     }
 
