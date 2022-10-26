@@ -20,11 +20,11 @@ class SmsDTO extends DTO
     protected string $accountId;
     protected string $providerId;
     protected string $providerType;
-    protected string $status;
+    protected int $status;
     protected string $responseMessage;
     protected string $phone;
     protected string $message;
-    protected string $sentTime;
+    protected int $sentTime;
 
     public function getId(): string
     {
@@ -46,7 +46,7 @@ class SmsDTO extends DTO
         return $this->providerType;
     }
 
-    public function getStatus(): string
+    public function getStatus(): int
     {
         return $this->status;
     }
@@ -66,7 +66,7 @@ class SmsDTO extends DTO
         return $this->message;
     }
 
-    public function getSentTime(): string
+    public function getSentTime(): int
     {
         return $this->sentTime;
     }

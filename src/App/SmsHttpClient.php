@@ -7,7 +7,7 @@
 
 namespace Dotsplatform\Sms;
 
-use Dotsplatform\Sms\DTO\SmsDTO;
+use Dotsplatform\Sms\DTO\SmsList;
 use Dotsplatform\Sms\Http\HttpClient;
 use Exception;
 use GuzzleHttp\Exception\ClientException;
@@ -15,7 +15,6 @@ use Dotsplatform\Sms\DTO\SmsAccountSettingsDTO;
 use Dotsplatform\Sms\DTO\SmsMessageDTO;
 use Dotsplatform\Sms\DTO\StoreAccountDTO;
 use Dotsplatform\Sms\DTO\StoreProviderDTO;
-use Illuminate\Support\Collection;
 use Dotsplatform\Sms\DTO\SmsFiltersDTO;
 
 class SmsHttpClient extends HttpClient
@@ -41,11 +40,7 @@ class SmsHttpClient extends HttpClient
         }
     }
 
-    /**
-     * @param SmsFiltersDTO $dto
-     * @return Collection<int, SmsDTO>
-     */
-    public function getMessages(SmsFiltersDTO $dto): Collection
+    public function getMessages(SmsFiltersDTO $dto): SmsList
     {
         $url = $this->generateGetMessagesUrl($dto->getAccountId());
         $params = $dto->toArray();
@@ -54,23 +49,9 @@ class SmsHttpClient extends HttpClient
             $response = $this->get($url, [
                 'query' => $params,
             ]);
-            $collection = new Collection($response);
-            return $collection->map(function ($item) {
-                return SmsDTO::fromArray([
-                    'id' => $item['id'],
-                    'phone' => $item['phone'],
-                    'status' => $item['status'],
-                    'message' => $item['message'],
-                    'accountId' => $item['account_id'],
-                    'providerId' => $item['provider_id'],
-                    'providerType' => $item['provider_type'],
-                    'responseMessage' => $item['response_message'],
-                    'sentTime' => $item['sent_time'],
-                ]);
-            });
-
+            return SmsList::fromArray($response);
         } catch (Exception) {
-            return new Collection([]);
+            return SmsList::fromArray([]);
         }
     }
 
