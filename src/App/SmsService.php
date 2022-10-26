@@ -11,12 +11,12 @@ use Dotsplatform\Sms\DTO\InfobipDTO;
 use Dotsplatform\Sms\DTO\MainSmsDTO;
 use Dotsplatform\Sms\DTO\SendPulseDTO;
 use Dotsplatform\Sms\DTO\SmsAccountSettingsDTO;
+use Dotsplatform\Sms\DTO\SmsList;
 use Dotsplatform\Sms\DTO\SmsMessageDTO;
 use Dotsplatform\Sms\DTO\SmsProviderType;
 use Dotsplatform\Sms\DTO\StoreAccountDTO;
 use Dotsplatform\Sms\DTO\StoreProviderDTO;
 use Dotsplatform\Sms\DTO\TurboSmsDTO;
-use Illuminate\Support\Collection;
 use Dotsplatform\Sms\DTO\SmsFiltersDTO;
 
 class SmsService
@@ -70,11 +70,7 @@ class SmsService
         $this->smsHttpClient->sendSms($dto);
     }
 
-    /**
-     * @param SmsFiltersDTO $dto
-     * @return Collection<int, SmsFiltersDTO>
-     */
-    public function getMessages(SmsFiltersDTO $dto): Collection
+    public function getMessages(SmsFiltersDTO $dto): SmsList
     {
         return $this->smsHttpClient->getMessages($dto);
     }
