@@ -34,10 +34,7 @@ class SmsHttpClient extends HttpClient
             'phone' => $dto->getPhone(),
             'message' => $dto->getMessage(),
         ];
-        try {
-            $this->post($url, $body);
-        } catch (Exception) {
-        }
+        $this->post($url, $body);
     }
 
     public function getMessages(SmsFiltersDTO $dto): SmsList
