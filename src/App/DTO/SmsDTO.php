@@ -21,7 +21,7 @@ class SmsDTO extends DTO
     protected ?string $providerId = null;
     protected string $providerType;
     protected int $status;
-    protected string $responseMessage;
+    protected ?string $responseMessage;
     protected string $phone;
     protected string $message;
     protected int $sentTime;
@@ -51,7 +51,7 @@ class SmsDTO extends DTO
         return $this->status;
     }
 
-    public function getResponseMessage(): string
+    public function getResponseMessage(): ?string
     {
         return $this->responseMessage;
     }

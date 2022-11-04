@@ -14,9 +14,9 @@ use Illuminate\Support\Collection;
  */
 class SmsList extends Collection
 {
-    public static function fromArray(array $data): self
+    public static function fromArray(array $data): static
     {
-        return new self(
+        return new static(
             array_map(
                 fn (array $item) => SmsDTO::fromArray([
                     'id' => $item['id'],
