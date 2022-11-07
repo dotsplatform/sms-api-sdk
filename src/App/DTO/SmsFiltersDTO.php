@@ -17,6 +17,18 @@ class SmsFiltersDTO extends DTO
     protected ?string $phone;
     protected int $limit = 50;
     protected int $offset = 0;
+    protected ?int $dateFrom = null;
+    protected ?int $dateTo = null;
+
+    public function getDateFrom(): ?int
+    {
+        return $this->dateFrom;
+    }
+
+    public function getDateTo(): ?int
+    {
+        return $this->dateTo;
+    }
 
     public function getAccountId(): string
     {
