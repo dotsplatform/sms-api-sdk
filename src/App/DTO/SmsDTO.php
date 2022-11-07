@@ -19,7 +19,7 @@ class SmsDTO extends DTO
     protected string $id;
     protected string $accountId;
     protected ?string $providerId = null;
-    protected string $providerType;
+    protected ?string $providerType = null;
     protected int $status;
     protected ?string $responseMessage;
     protected string $phone;
@@ -41,7 +41,7 @@ class SmsDTO extends DTO
         return $this->providerId;
     }
 
-    public function getProviderType(): string
+    public function getProviderType(): ?string
     {
         return $this->providerType;
     }
