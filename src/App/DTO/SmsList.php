@@ -7,7 +7,6 @@
 
 namespace Dotsplatform\Sms\DTO;
 
-
 use Illuminate\Support\Collection;
 
 /**
@@ -19,7 +18,7 @@ class SmsList extends Collection
     {
         return new static(
             array_map(
-                fn(array $item) => SmsDTO::fromArray([
+                fn (array $item) => SmsDTO::fromArray([
                     'id' => $item['id'],
                     'phone' => $item['phone'],
                     'status' => $item['status'],
@@ -31,6 +30,7 @@ class SmsList extends Collection
                     'sentTime' => $item['sent_time'],
                 ]),
                 $data,
-            ));
+            )
+        );
     }
 }

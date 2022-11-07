@@ -7,7 +7,6 @@
 
 namespace Dotsplatform\Sms\DTO;
 
-
 use Dots\Data\DTO;
 
 class SmsDTO extends DTO
@@ -15,11 +14,12 @@ class SmsDTO extends DTO
     public const STATUS_NEW = 0;
     public const STATUS_SUCCESSFUL = 20;
     public const STATUS_FAILED = 30;
+    public const STATUS_DECLINED_BANNED = 60;
 
     protected string $id;
     protected string $accountId;
-    protected string $providerId;
-    protected string $providerType;
+    protected ?string $providerId = null;
+    protected ?string $providerType = null;
     protected int $status;
     protected ?string $responseMessage;
     protected string $phone;
@@ -36,12 +36,12 @@ class SmsDTO extends DTO
         return $this->accountId;
     }
 
-    public function getProviderId(): string
+    public function getProviderId(): ?string
     {
         return $this->providerId;
     }
 
-    public function getProviderType(): string
+    public function getProviderType(): ?string
     {
         return $this->providerType;
     }

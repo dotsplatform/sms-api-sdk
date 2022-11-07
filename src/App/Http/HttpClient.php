@@ -99,7 +99,8 @@ abstract class HttpClient
             return;
         }
         throw new SmsHttpClientException(
-            "Sms Request failed with status code {$response->getStatusCode()}"
+            'Sms Request failed with status code',
+            $response->getStatusCode(),
         );
     }
 
