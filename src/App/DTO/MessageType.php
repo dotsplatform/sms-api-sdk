@@ -7,7 +7,6 @@
 
 namespace App\Services\Sms\DTO;
 
-
 abstract class MessageType
 {
     public const SMS = 'sms';
