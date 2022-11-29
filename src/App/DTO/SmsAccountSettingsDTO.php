@@ -6,8 +6,6 @@
  */
 
 namespace Dotsplatform\Sms\DTO;
-
-use App\Services\Sms\DTO\MessageType;
 use Dots\Data\DTO;
 
 class SmsAccountSettingsDTO extends DTO
