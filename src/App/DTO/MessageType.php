@@ -5,7 +5,7 @@
  * @author    Oleksandr Polosmak <o.polosmak@dotsplatform.com>
  */
 
-namespace App\Services\Sms\DTO;
+namespace Dotsplatform\Sms\DTO;
 
 abstract class MessageType
 {
