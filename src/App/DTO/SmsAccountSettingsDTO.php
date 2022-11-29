@@ -7,13 +7,16 @@
 
 namespace Dotsplatform\Sms\DTO;
 
+use App\Services\Sms\DTO\MessageType;
 use Dots\Data\DTO;
 
 class SmsAccountSettingsDTO extends DTO
 {
     protected bool $SMSDisabled = true;
     protected ?string $senderProvider;
-    protected ?string $senderName;
+    protected ?string $senderNameSms;
+    protected ?string $senderNameViber;
+    protected string $messageType = MessageType::SMS;
 
     public function isSMSDisabled(): bool
     {
@@ -25,8 +28,18 @@ class SmsAccountSettingsDTO extends DTO
         return $this->senderProvider;
     }
 
-    public function getSenderName(): ?string
+    public function getSenderNameSms(): ?string
     {
-        return $this->senderName;
+        return $this->senderNameSms;
+    }
+
+    public function getSenderNameViber(): ?string
+    {
+        return $this->senderNameViber;
+    }
+
+    public function getMessageType(): string
+    {
+        return $this->messageType;
     }
 }
