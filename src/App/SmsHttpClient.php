@@ -7,6 +7,7 @@
 
 namespace Dotsplatform\Sms;
 
+use Dotsplatform\Sms\DTO\SendPulseViberSenderNamesList;
 use Dotsplatform\Sms\DTO\SmsList;
 use Dotsplatform\Sms\Http\HttpClient;
 use Exception;
@@ -25,6 +26,7 @@ class SmsHttpClient extends HttpClient
     private const FIND_ACCOUNT_URL_TEMPLATE = '/api/accounts/%s';
     private const FIND_ACCOUNT_PROVIDER_URL_TEMPLATE = '/api/accounts/%s/providers/%s';
     private const STORE_PROVIDER_SMS_URL_TEMPLATE = '/api/accounts/%s/providers/%s';
+    private const GET_PROVIDER_SENDPULSE_VIBER_SENDER_NAMES_URL_TEMPLATE = '/api/accounts/%s/providers/send-pulse/viber-names';
 
 
     public function sendSms(SmsMessageDTO $dto): void
@@ -103,6 +105,16 @@ class SmsHttpClient extends HttpClient
         }
     }
 
+    public function getProviderSendPulseViberSenderNames(string $accountId): SendPulseViberSenderNamesList
+    {
+        $url = $this->generateProviderSendPulseViberSenderNamesUrl($accountId);
+        $response = $this->get($url);
+        if (!is_array($response)) {
+            return SendPulseViberSenderNamesList::empty();
+        }
+        return SendPulseViberSenderNamesList::fromArray($response);
+    }
+
     private function generateGetMessagesUrl(string $accountId): string
     {
         return sprintf(self::GET_MESSAGES_URL_TEMPLATE, $accountId);
@@ -129,6 +141,14 @@ class SmsHttpClient extends HttpClient
             self::STORE_PROVIDER_SMS_URL_TEMPLATE,
             $dto->getAccountId(),
             $dto->getType(),
+        );
+    }
+
+    private function generateProviderSendPulseViberSenderNamesUrl(string $accountId): string
+    {
+        return sprintf(
+            self::GET_PROVIDER_SENDPULSE_VIBER_SENDER_NAMES_URL_TEMPLATE,
+            $accountId,
         );
     }
 

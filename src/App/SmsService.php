@@ -10,6 +10,7 @@ namespace Dotsplatform\Sms;
 use Dotsplatform\Sms\DTO\InfobipDTO;
 use Dotsplatform\Sms\DTO\MainSmsDTO;
 use Dotsplatform\Sms\DTO\SendPulseDTO;
+use Dotsplatform\Sms\DTO\SendPulseViberSenderNamesList;
 use Dotsplatform\Sms\DTO\SmsAccountSettingsDTO;
 use Dotsplatform\Sms\DTO\SmsList;
 use Dotsplatform\Sms\DTO\SmsMessageDTO;
@@ -73,5 +74,10 @@ class SmsService
     public function getMessages(SmsFiltersDTO $dto): SmsList
     {
         return $this->smsHttpClient->getMessages($dto);
+    }
+
+    public function getProviderSendPulseViberSenderNames(string $accountId): SendPulseViberSenderNamesList
+    {
+        return $this->getProviderSendPulseViberSenderNames($accountId);
     }
 }
