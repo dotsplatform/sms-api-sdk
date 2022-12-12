@@ -13,6 +13,12 @@ class SendPulseDTO extends DTO
 {
     protected ?string $clientId = null;
     protected ?string $clientSecret = null;
+    protected ?string $viberSenderNameId = null;
+
+    public function getViberSenderNameId(): ?string
+    {
+        return $this->viberSenderNameId;
+    }
 
     public function getClientId(): ?string
     {
