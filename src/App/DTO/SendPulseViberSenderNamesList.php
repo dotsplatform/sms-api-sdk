@@ -7,8 +7,8 @@
 
 namespace Dotsplatform\Sms\DTO;
 
-
 use Illuminate\Support\Collection;
+
 /**
  * @extends Collection<int, SendPulseViberSenderNameDTO>
  */
@@ -18,7 +18,7 @@ class SendPulseViberSenderNamesList extends Collection
     {
         return new static(
             array_map(
-                fn(array $item) => SendPulseViberSenderNameDTO::fromArray([
+                fn (array $item) => SendPulseViberSenderNameDTO::fromArray([
                     'id' => $item['id'],
                     'name' => $item['name'],
                 ]),
