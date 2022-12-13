@@ -78,6 +78,6 @@ class SmsService
 
     public function getProviderSendPulseViberSenderNames(string $accountId): SendPulseViberSenderNamesList
     {
-        return $this->getProviderSendPulseViberSenderNames($accountId);
+        return $this->smsHttpClient->getProviderSendPulseViberSenderNames($accountId);
     }
 }
