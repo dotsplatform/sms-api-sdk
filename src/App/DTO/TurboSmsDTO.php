@@ -12,9 +12,15 @@ use Dots\Data\DTO;
 class TurboSmsDTO extends DTO
 {
     protected ?string $auth_token = null;
+    protected ?string $senderNameViber;
 
     public function getAuthToken(): ?string
     {
         return $this->auth_token;
+    }
+
+    public function getSenderNameViber(): ?string
+    {
+        return $this->senderNameViber;
     }
 }

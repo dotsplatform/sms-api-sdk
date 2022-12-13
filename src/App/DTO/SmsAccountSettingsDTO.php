@@ -14,7 +14,6 @@ class SmsAccountSettingsDTO extends DTO
     protected bool $SMSDisabled = true;
     protected ?string $senderProvider;
     protected ?string $senderNameSms;
-    protected ?string $senderNameViber;
     protected string $messageType = MessageType::SMS;
 
     public function isSMSDisabled(): bool
@@ -30,11 +29,6 @@ class SmsAccountSettingsDTO extends DTO
     public function getSenderNameSms(): ?string
     {
         return $this->senderNameSms;
-    }
-
-    public function getSenderNameViber(): ?string
-    {
-        return $this->senderNameViber;
     }
 
     public function getMessageType(): string
