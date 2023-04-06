@@ -19,11 +19,12 @@ use Dotsplatform\Sms\DTO\StoreAccountDTO;
 use Dotsplatform\Sms\DTO\StoreProviderDTO;
 use Dotsplatform\Sms\DTO\TurboSmsDTO;
 use Dotsplatform\Sms\DTO\SmsFiltersDTO;
+use Dotsplatform\Sms\DTO\TwilioDTO;
 
 class SmsService
 {
     public function __construct(
-        private SmsHttpClient $smsHttpClient,
+        private readonly SmsHttpClient $smsHttpClient,
     ) {
     }
 
@@ -48,6 +49,12 @@ class SmsService
     {
         $response = $this->smsHttpClient->findAccountProviderByType($accountId, SmsProviderType::SEND_PULSE);
         return SendPulseDTO::fromArray($response['data'] ?? []);
+    }
+
+    public function findAccountProviderTwilio(string $accountId): TwilioDTO
+    {
+        $response = $this->smsHttpClient->findAccountProviderByType($accountId, SmsProviderType::TWILIO);
+        return TwilioDTO::fromArray($response['data'] ?? []);
     }
 
     public function findAccountProviderMainSms(string $accountId): MainSmsDTO
