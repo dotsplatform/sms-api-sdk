@@ -13,4 +13,5 @@ abstract class SmsProviderType
     public const TURBO_SMS = 'turbo-sms';
     public const MAIN_SMS = 'main-sms';
     public const SEND_PULSE = 'sendpulse';
+    public const TWILIO = 'twilio';
 }
