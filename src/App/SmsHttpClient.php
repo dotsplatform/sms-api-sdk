@@ -9,6 +9,8 @@ namespace Dotsplatform\Sms;
 
 use Dotsplatform\Sms\DTO\SendPulseViberSenderNamesList;
 use Dotsplatform\Sms\DTO\SmsList;
+use Dotsplatform\Sms\DTO\Statistics\SmsCountByPhoneFiltersDTO;
+use Dotsplatform\Sms\DTO\Statistics\SmsCountByPhoneList;
 use Dotsplatform\Sms\Http\HttpClient;
 use Exception;
 use GuzzleHttp\Exception\ClientException;
@@ -21,6 +23,7 @@ use Dotsplatform\Sms\DTO\SmsFiltersDTO;
 class SmsHttpClient extends HttpClient
 {
     private const GET_MESSAGES_URL_TEMPLATE = '/api/accounts/%s/sms';
+    private const GET_SMS_COUNT_BY_PHONE_URL_TEMPLATE = '/api/accounts/%s/sms/statistics/count-by-phone';
     private const SEND_SMS_URL_TEMPLATE = '/api/accounts/%s/sms';
     private const STORE_ACCOUNT_URL_TEMPLATE = '/api/accounts';
     private const FIND_ACCOUNT_URL_TEMPLATE = '/api/accounts/%s';
@@ -51,6 +54,21 @@ class SmsHttpClient extends HttpClient
             return SmsList::fromArray($response);
         } catch (Exception) {
             return new SmsList();
+        }
+    }
+
+    public function getSmsCountByPhones(SmsCountByPhoneFiltersDTO $dto): SmsCountByPhoneList
+    {
+        $url = $this->generateGetSmsCountByPhones($dto->getAccountId());
+        $params = $dto->toArray();
+        unset($params['accountId']);
+        try {
+            $response = $this->get($url, [
+                'query' => $params,
+            ]);
+            return SmsCountByPhoneList::fromArray($response);
+        } catch (Exception) {
+            return new SmsCountByPhoneList();
         }
     }
 
@@ -118,6 +136,11 @@ class SmsHttpClient extends HttpClient
     private function generateGetMessagesUrl(string $accountId): string
     {
         return sprintf(self::GET_MESSAGES_URL_TEMPLATE, $accountId);
+    }
+
+    private function generateGetSmsCountByPhones(string $accountId): string
+    {
+        return sprintf(self::GET_SMS_COUNT_BY_PHONE_URL_TEMPLATE, $accountId);
     }
 
     private function generateSendSmsUrl(string $accountId): string

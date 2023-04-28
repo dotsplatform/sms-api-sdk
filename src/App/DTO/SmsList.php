@@ -11,6 +11,8 @@ use Illuminate\Support\Collection;
 
 /**
  * @extends Collection<int, SmsDTO>
+ * @method SmsDTO[] all()
+ * @method SmsDTO|null get($key, $default = null)
  */
 class SmsList extends Collection
 {

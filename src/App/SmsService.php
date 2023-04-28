@@ -15,6 +15,7 @@ use Dotsplatform\Sms\DTO\SmsAccountSettingsDTO;
 use Dotsplatform\Sms\DTO\SmsList;
 use Dotsplatform\Sms\DTO\SmsMessageDTO;
 use Dotsplatform\Sms\DTO\SmsProviderType;
+use Dotsplatform\Sms\DTO\Statistics\SmsCountByPhoneFiltersDTO;
 use Dotsplatform\Sms\DTO\StoreAccountDTO;
 use Dotsplatform\Sms\DTO\StoreProviderDTO;
 use Dotsplatform\Sms\DTO\TurboSmsDTO;
@@ -81,6 +82,11 @@ class SmsService
     public function getMessages(SmsFiltersDTO $dto): SmsList
     {
         return $this->smsHttpClient->getMessages($dto);
+    }
+
+    public function getSmsCountByPhones(SmsCountByPhoneFiltersDTO $dto): SmsList
+    {
+        return $this->smsHttpClient->getSmsCountByPhones($dto);
     }
 
     public function getProviderSendPulseViberSenderNames(string $accountId): SendPulseViberSenderNamesList
