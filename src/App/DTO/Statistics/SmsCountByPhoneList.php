@@ -28,4 +28,9 @@ class SmsCountByPhoneList extends Collection
         );
     }
 
+    public function phones(): array
+    {
+        return $this->map(fn (SmsCountByPhoneDTO $item) => $item->getPhone())->toArray();
+    }
+
 }
