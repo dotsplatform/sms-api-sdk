@@ -62,14 +62,10 @@ class SmsHttpClient extends HttpClient
         $url = $this->generateGetSmsCountByPhones($dto->getAccountId());
         $params = $dto->toArray();
         unset($params['accountId']);
-        try {
-            $response = $this->get($url, [
-                'query' => $params,
-            ]);
-            return SmsCountByPhoneList::fromArray($response);
-        } catch (Exception) {
-            return new SmsCountByPhoneList();
-        }
+        $response = $this->get($url, [
+            'query' => $params,
+        ]);
+        return SmsCountByPhoneList::fromArray($response);
     }
 
     public function storeAccount(StoreAccountDTO $dto): void
