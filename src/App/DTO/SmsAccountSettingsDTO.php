@@ -13,6 +13,7 @@ class SmsAccountSettingsDTO extends DTO
 {
     protected bool $SMSDisabled = true;
     protected ?string $senderProvider;
+    protected ?string $fallbackSenderProvider;
     protected ?string $senderNameSms;
     protected string $messageType = MessageType::SMS;
 
@@ -24,6 +25,11 @@ class SmsAccountSettingsDTO extends DTO
     public function getSenderProvider(): ?string
     {
         return $this->senderProvider;
+    }
+
+    public function getFallbackSenderProvider(): ?string
+    {
+        return $this->fallbackSenderProvider;
     }
 
     public function getSenderNameSms(): ?string
