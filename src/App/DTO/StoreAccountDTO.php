@@ -19,7 +19,7 @@ class StoreAccountDTO extends DTO
     public function getId(): string
     {
         return $this->id;
-    }s
+    }
 
     public function getName(): string
     {
