@@ -1,6 +1,6 @@
 <?php
 /**
- * Description of AccountSmsDTO.php
+ * Description of SmsAccountSettingsDTO.php
  * @copyright Copyright (c) DOTSPLATFORM, LLC
  * @author    Oleksandr Polosmak <o.polosmak@dotsplatform.com>
  */
@@ -16,6 +16,7 @@ class SmsAccountSettingsDTO extends DTO
     protected ?string $fallbackSenderProvider;
     protected ?string $senderNameSms;
     protected string $messageType = MessageType::SMS;
+    protected ?float $lowBalanceThreshold = null;
 
     public function isSMSDisabled(): bool
     {
@@ -40,5 +41,10 @@ class SmsAccountSettingsDTO extends DTO
     public function getMessageType(): string
     {
         return $this->messageType;
+    }
+
+    public function getLowBalanceThreshold(): ?float
+    {
+        return $this->lowBalanceThreshold;
     }
 }
