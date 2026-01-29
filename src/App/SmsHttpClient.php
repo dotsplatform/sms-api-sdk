@@ -74,6 +74,7 @@ class SmsHttpClient extends HttpClient
         $body = [
             'id' => $dto->getId(),
             'name' => $dto->getName(),
+            'lang' => $dto->getLang(),
             'settings' => $dto->getSettings(),
         ];
         try {
