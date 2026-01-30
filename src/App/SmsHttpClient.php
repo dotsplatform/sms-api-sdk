@@ -7,6 +7,7 @@
 
 namespace Dotsplatform\Sms;
 
+use Dotsplatform\Sms\DTO\ProviderBalanceDTO;
 use Dotsplatform\Sms\DTO\SendPulseViberSenderNamesList;
 use Dotsplatform\Sms\DTO\SmsList;
 use Dotsplatform\Sms\DTO\Statistics\SmsCountByPhoneFiltersDTO;
@@ -121,12 +122,12 @@ class SmsHttpClient extends HttpClient
         }
     }
 
-    public function getProviderBalance(string $accountId, string $providerType): ?float
+    public function getProviderBalance(string $accountId, string $providerType): ?ProviderBalanceDTO
     {
         $url = $this->generateGetProviderBalanceUrl($accountId, $providerType);
         try {
             $response = $this->get($url);
-            return $response['balance'] ?? null;
+            return ProviderBalanceDTO::fromArray($response);
         } catch (ClientException) {
             return null;
         } catch (Exception) {
