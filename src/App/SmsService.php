@@ -94,4 +94,9 @@ class SmsService
     {
         return $this->smsHttpClient->getProviderSendPulseViberSenderNames($accountId);
     }
+
+    public function getProviderBalance(string $accountId, string $providerType): ?float
+    {
+        return $this->smsHttpClient->getProviderBalance($accountId, $providerType);
+    }
 }

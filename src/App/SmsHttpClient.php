@@ -7,6 +7,7 @@
 
 namespace Dotsplatform\Sms;
 
+use Dotsplatform\Sms\DTO\ProviderBalanceDTO;
 use Dotsplatform\Sms\DTO\SendPulseViberSenderNamesList;
 use Dotsplatform\Sms\DTO\SmsList;
 use Dotsplatform\Sms\DTO\Statistics\SmsCountByPhoneFiltersDTO;
@@ -28,6 +29,7 @@ class SmsHttpClient extends HttpClient
     private const STORE_ACCOUNT_URL_TEMPLATE = '/api/accounts';
     private const FIND_ACCOUNT_URL_TEMPLATE = '/api/accounts/%s';
     private const FIND_ACCOUNT_PROVIDER_URL_TEMPLATE = '/api/accounts/%s/providers/%s';
+    private const GET_PROVIDER_BALANCE_URL_TEMPLATE = '/api/accounts/%s/providers/%s/balance';
     private const STORE_PROVIDER_SMS_URL_TEMPLATE = '/api/accounts/%s/providers/%s';
     private const GET_PROVIDER_SENDPULSE_VIBER_SENDER_NAMES_URL_TEMPLATE = '/api/accounts/%s/providers/send-pulse/viber-names';
 
@@ -120,6 +122,19 @@ class SmsHttpClient extends HttpClient
         }
     }
 
+    public function getProviderBalance(string $accountId, string $providerType): ?ProviderBalanceDTO
+    {
+        $url = $this->generateGetProviderBalanceUrl($accountId, $providerType);
+        try {
+            $response = $this->get($url);
+            return ProviderBalanceDTO::fromArray($response);
+        } catch (ClientException) {
+            return null;
+        } catch (Exception) {
+            return null;
+        }
+    }
+
     public function getProviderSendPulseViberSenderNames(string $accountId): SendPulseViberSenderNamesList
     {
         $url = $this->generateProviderSendPulseViberSenderNamesUrl($accountId);
@@ -175,5 +190,10 @@ class SmsHttpClient extends HttpClient
     private function generateFindAccountProviderByType(string $accountId, string $providerType): string
     {
         return sprintf(self::FIND_ACCOUNT_PROVIDER_URL_TEMPLATE, $accountId, $providerType);
+    }
+
+    private function generateGetProviderBalanceUrl(string $accountId, string $providerType): string
+    {
+        return sprintf(self::GET_PROVIDER_BALANCE_URL_TEMPLATE, $accountId, $providerType);
     }
 }
