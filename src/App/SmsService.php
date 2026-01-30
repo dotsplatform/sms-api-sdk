@@ -9,6 +9,7 @@ namespace Dotsplatform\Sms;
 
 use Dotsplatform\Sms\DTO\InfobipDTO;
 use Dotsplatform\Sms\DTO\MainSmsDTO;
+use Dotsplatform\Sms\DTO\ProviderBalanceDTO;
 use Dotsplatform\Sms\DTO\SendPulseDTO;
 use Dotsplatform\Sms\DTO\SendPulseViberSenderNamesList;
 use Dotsplatform\Sms\DTO\SmsAccountSettingsDTO;
@@ -95,7 +96,7 @@ class SmsService
         return $this->smsHttpClient->getProviderSendPulseViberSenderNames($accountId);
     }
 
-    public function getProviderBalance(string $accountId, string $providerType): ?float
+    public function getProviderBalance(string $accountId, string $providerType): ?ProviderBalanceDTO
     {
         return $this->smsHttpClient->getProviderBalance($accountId, $providerType);
     }
