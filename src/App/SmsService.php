@@ -14,6 +14,7 @@ use Dotsplatform\Sms\DTO\SendPulseDTO;
 use Dotsplatform\Sms\DTO\SendPulseViberSenderNamesList;
 use Dotsplatform\Sms\DTO\SmsAccountSettingsDTO;
 use Dotsplatform\Sms\DTO\SmsList;
+use Dotsplatform\Sms\DTO\SmsMdDTO;
 use Dotsplatform\Sms\DTO\SmsMessageDTO;
 use Dotsplatform\Sms\DTO\SmsProviderType;
 use Dotsplatform\Sms\DTO\Statistics\SmsCountByPhoneFiltersDTO;
@@ -58,6 +59,12 @@ class SmsService
     {
         $response = $this->smsHttpClient->findAccountProviderByType($accountId, SmsProviderType::TWILIO);
         return TwilioDTO::fromArray($response['data'] ?? []);
+    }
+
+    public function findAccountProviderSmsMd(string $accountId): SmsMdDTO
+    {
+        $response = $this->smsHttpClient->findAccountProviderByType($accountId, SmsProviderType::SMS_MD);
+        return SmsMdDTO::fromArray($response['data'] ?? []);
     }
 
     public function findAccountProviderMainSms(string $accountId): MainSmsDTO
