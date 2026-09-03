@@ -55,8 +55,8 @@ class SmsAccountSettingsDTO extends DTO
         return $this->fallbackLowBalanceThreshold;
     }
 
-    public function getCountryProviders(): SmsCountryProvidersList
+    public function getCountryProviders(): ?SmsCountryProvidersList
     {
-        return $this->countryProviders ?? SmsCountryProvidersList::make();
+        return $this->countryProviders;
     }
 }
