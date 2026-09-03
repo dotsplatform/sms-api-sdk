@@ -18,6 +18,7 @@ class SmsAccountSettingsDTO extends DTO
     protected string $messageType = MessageType::SMS;
     protected ?float $lowBalanceThreshold = null;
     protected ?float $fallbackLowBalanceThreshold = null;
+    protected ?SmsCountryProvidersList $countryProviders = null;
 
     public function isSMSDisabled(): bool
     {
@@ -52,5 +53,10 @@ class SmsAccountSettingsDTO extends DTO
     public function getFallbackLowBalanceThreshold(): ?float
     {
         return $this->fallbackLowBalanceThreshold;
+    }
+
+    public function getCountryProviders(): SmsCountryProvidersList
+    {
+        return $this->countryProviders ?? SmsCountryProvidersList::make();
     }
 }
