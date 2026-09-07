@@ -25,7 +25,17 @@ abstract class HttpClient
     public function __construct(
     ) {
         $this->serviceHost = config('sms-api-sdk.sms-server.url');
-        $this->gatewayToken = (string) config('sms-api-sdk.sms-server.token');
+        $this->gatewayToken = $this->resolveGatewayToken();
+    }
+
+    private function resolveGatewayToken(): string
+    {
+        $token = config('sms-api-sdk.sms-server.token');
+        if (!is_string($token)) {
+            return '';
+        }
+
+        return $token;
     }
 
     protected function makeClient(): GuzzleClient
