@@ -19,6 +19,8 @@ class SmsAccountSettingsDTO extends DTO
     protected ?float $lowBalanceThreshold = null;
     protected ?float $fallbackLowBalanceThreshold = null;
     protected ?SmsCountryProvidersList $countryProviders = null;
+    protected ?int $hourlyLimit = null;
+    protected ?int $dailyLimit = null;
 
     public function isSMSDisabled(): bool
     {
@@ -58,5 +60,15 @@ class SmsAccountSettingsDTO extends DTO
     public function getCountryProviders(): ?SmsCountryProvidersList
     {
         return $this->countryProviders;
+    }
+
+    public function getHourlyLimit(): ?int
+    {
+        return $this->hourlyLimit;
+    }
+
+    public function getDailyLimit(): ?int
+    {
+        return $this->dailyLimit;
     }
 }

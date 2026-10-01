@@ -15,6 +15,7 @@ class SmsDTO extends DTO
     public const STATUS_SUCCESSFUL = 20;
     public const STATUS_FAILED = 30;
     public const STATUS_DECLINED_BANNED = 60;
+    public const STATUS_DECLINED_LIMIT_EXCEEDED = 70;
 
     protected string $id;
     protected string $accountId;
