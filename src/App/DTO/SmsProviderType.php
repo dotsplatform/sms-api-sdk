@@ -15,4 +15,5 @@ abstract class SmsProviderType
     public const SEND_PULSE = 'sendpulse';
     public const TWILIO = 'twilio';
     public const SMS_MD = 'sms-md';
+    public const NANDO = 'nando';
 }
