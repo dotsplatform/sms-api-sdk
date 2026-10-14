@@ -9,6 +9,7 @@ namespace Dotsplatform\Sms;
 
 use Dotsplatform\Sms\DTO\InfobipDTO;
 use Dotsplatform\Sms\DTO\MainSmsDTO;
+use Dotsplatform\Sms\DTO\NandoDTO;
 use Dotsplatform\Sms\DTO\ProviderBalanceDTO;
 use Dotsplatform\Sms\DTO\SendPulseDTO;
 use Dotsplatform\Sms\DTO\SendPulseViberSenderNamesList;
@@ -65,6 +66,12 @@ class SmsService
     {
         $response = $this->smsHttpClient->findAccountProviderByType($accountId, SmsProviderType::SMS_MD);
         return SmsMdDTO::fromArray($response['data'] ?? []);
+    }
+
+    public function findAccountProviderNando(string $accountId): NandoDTO
+    {
+        $response = $this->smsHttpClient->findAccountProviderByType($accountId, SmsProviderType::NANDO);
+        return NandoDTO::fromArray($response['data'] ?? []);
     }
 
     public function findAccountProviderMainSms(string $accountId): MainSmsDTO
