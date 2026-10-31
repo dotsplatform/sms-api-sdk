@@ -19,6 +19,7 @@ use Dotsplatform\Sms\DTO\SmsMessageDTO;
 use Dotsplatform\Sms\DTO\SmsProviderType;
 use Dotsplatform\Sms\DTO\Statistics\SmsCountByPhoneFiltersDTO;
 use Dotsplatform\Sms\DTO\Statistics\SmsCountByPhoneList;
+use Dotsplatform\Sms\DTO\Statistics\SmsDeliveryCountsList;
 use Dotsplatform\Sms\DTO\StoreAccountDTO;
 use Dotsplatform\Sms\DTO\StoreProviderDTO;
 use Dotsplatform\Sms\DTO\TurboSmsDTO;
@@ -96,6 +97,17 @@ class SmsService
     public function getSmsCountByPhones(SmsCountByPhoneFiltersDTO $dto): SmsCountByPhoneList
     {
         return $this->smsHttpClient->getSmsCountByPhones($dto);
+    }
+
+    /**
+     * Sent / delivered / failed / pending / not reported SMS counts per external reference of one account.
+     * Every requested reference is in the result (zeros when nothing was sent with it). At most 100 references.
+     *
+     * @param string[] $externalReferences
+     */
+    public function getDeliveryCountsByReferences(string $accountId, array $externalReferences): SmsDeliveryCountsList
+    {
+        return $this->smsHttpClient->getDeliveryCountsByReferences($accountId, $externalReferences);
     }
 
     public function getProviderSendPulseViberSenderNames(string $accountId): SendPulseViberSenderNamesList

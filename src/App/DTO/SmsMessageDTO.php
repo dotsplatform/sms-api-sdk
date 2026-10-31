@@ -15,6 +15,12 @@ class SmsMessageDTO extends DTO
     protected string $phone;
     protected string $message;
 
+    /**
+     * Optional id of the campaign the message belongs to (e.g. a CRM broadcast token). The sms service stores
+     * it with the message and counts deliveries per reference: see SmsService::getDeliveryCountsByReferences().
+     */
+    protected ?string $externalReference = null;
+
     public function getAccountId(): string
     {
         return $this->accountId;
@@ -28,5 +34,10 @@ class SmsMessageDTO extends DTO
     public function getMessage(): string
     {
         return $this->message;
+    }
+
+    public function getExternalReference(): ?string
+    {
+        return $this->externalReference;
     }
 }

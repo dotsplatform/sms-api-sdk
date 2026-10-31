@@ -12,6 +12,7 @@ use Dotsplatform\Sms\DTO\SendPulseViberSenderNamesList;
 use Dotsplatform\Sms\DTO\SmsList;
 use Dotsplatform\Sms\DTO\Statistics\SmsCountByPhoneFiltersDTO;
 use Dotsplatform\Sms\DTO\Statistics\SmsCountByPhoneList;
+use Dotsplatform\Sms\DTO\Statistics\SmsDeliveryCountsList;
 use Dotsplatform\Sms\Http\HttpClient;
 use Exception;
 use GuzzleHttp\Exception\ClientException;
@@ -25,6 +26,7 @@ class SmsHttpClient extends HttpClient
 {
     private const GET_MESSAGES_URL_TEMPLATE = '/api/accounts/%s/sms';
     private const GET_SMS_COUNT_BY_PHONE_URL_TEMPLATE = '/api/accounts/%s/sms/statistics/count-by-phone';
+    private const GET_DELIVERY_COUNTS_BY_REFERENCE_URL_TEMPLATE = '/api/accounts/%s/sms/statistics/delivery-by-reference';
     private const SEND_SMS_URL_TEMPLATE = '/api/accounts/%s/sms';
     private const STORE_ACCOUNT_URL_TEMPLATE = '/api/accounts';
     private const FIND_ACCOUNT_URL_TEMPLATE = '/api/accounts/%s';
@@ -41,7 +43,28 @@ class SmsHttpClient extends HttpClient
             'phone' => $dto->getPhone(),
             'message' => $dto->getMessage(),
         ];
+        if ($dto->getExternalReference() !== null) {
+            $body['externalReference'] = $dto->getExternalReference();
+        }
         $this->post($url, $body);
+    }
+
+    /**
+     * @param string[] $externalReferences at most 100 per call
+     */
+    public function getDeliveryCountsByReferences(string $accountId, array $externalReferences): SmsDeliveryCountsList
+    {
+        if (empty($externalReferences)) {
+            return new SmsDeliveryCountsList();
+        }
+        $url = $this->generateGetDeliveryCountsByReferenceUrl($accountId);
+        $response = $this->get($url, [
+            'query' => [
+                'references' => array_values($externalReferences),
+            ],
+        ]);
+
+        return SmsDeliveryCountsList::fromArray($response);
     }
 
     public function getMessages(SmsFiltersDTO $dto): SmsList
@@ -153,6 +176,11 @@ class SmsHttpClient extends HttpClient
     private function generateGetSmsCountByPhones(string $accountId): string
     {
         return sprintf(self::GET_SMS_COUNT_BY_PHONE_URL_TEMPLATE, $accountId);
+    }
+
+    private function generateGetDeliveryCountsByReferenceUrl(string $accountId): string
+    {
+        return sprintf(self::GET_DELIVERY_COUNTS_BY_REFERENCE_URL_TEMPLATE, $accountId);
     }
 
     private function generateSendSmsUrl(string $accountId): string
